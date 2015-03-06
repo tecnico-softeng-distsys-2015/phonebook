@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pt.tecnico</groupId>
+    <artifactId>phonebook</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Phonebook</name>
+
+    <properties>
+	<java.version>1.8</java.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <fenix.framework.codeGeneratorClassName>pt.ist.fenixframework.backend.jvstmojb.codeGenerator.FenixCodeGeneratorOneBoxPerObject</fenix.framework.codeGeneratorClassName>
+        <fenix.framework.backend>jvstm-ojb</fenix.framework.backend>
+        <version.pt.ist.fenix.framework>2.6.0</version.pt.ist.fenix.framework>
+
+        <version.junit>4.11</version.junit>
+        <version.slf4j.api>1.7.7</version.slf4j.api>
+        <version.ch.qos.logback.logback.classic>1.1.2</version.ch.qos.logback.logback.classic>
+
+	<version.org.jdom.jdom>2.0.5</version.org.jdom.jdom>
+    </properties>
+
+    <build>
+        <plugins>
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+	    <version>3.1</version>
+	    <configuration>
+	      <source>${java.version}</source>
+	      <target>${java.version}</target>
+	      <verbose>true</verbose>
+	      <fork>true</fork>
+	    </configuration>
+	  </plugin>	  
+          <plugin>
+            <groupId>pt.ist</groupId>
+            <artifactId>ff-maven-plugin</artifactId>
+            <version>${version.pt.ist.fenix.framework}</version>
+            <configuration>
+              <codeGeneratorClassName>${fenix.framework.codeGeneratorClassName}</codeGeneratorClassName>
+            </configuration>
+            <executions>
+              <execution>
+                <id>default</id>
+                <goals>
+                  <goal>ff-generate-domain</goal>
+                  <goal>ff-process-atomic-annotations</goal>
+                </goals>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>pt.ist</groupId>
+                <artifactId>fenix-framework-backend-${fenix.framework.backend}-code-generator</artifactId>
+                <version>${version.pt.ist.fenix.framework}</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+    	      <mainClass>pt.tecnico.phonebook.PhoneBookApplication</mainClass>
+              <killAfter>-1</killAfter>
+                </configuration>
+          </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+	<dependency>
+	  <groupId>pt.ist</groupId>
+	  <artifactId>fenix-framework-core-api</artifactId>
+	  <version>${version.pt.ist.fenix.framework}</version>
+	</dependency>
+	<dependency>
+	  <groupId>pt.ist</groupId>
+	  <artifactId>fenix-framework-core-consistency-predicates</artifactId>
+	  <version>${version.pt.ist.fenix.framework}</version>
+	</dependency>
+        <dependency>
+            <groupId>pt.ist</groupId>
+            <artifactId>fenix-framework-backend-${fenix.framework.backend}-runtime</artifactId>
+            <version>${version.pt.ist.fenix.framework}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j.api}</version>
+        </dependency>
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>${version.ch.qos.logback.logback.classic}</version>
+        </dependency>
+	<dependency>
+	  <groupId>org.jdom</groupId>
+	  <artifactId>jdom2</artifactId>
+	  <version>${version.org.jdom.jdom}</version>
+	</dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+	  <id>fenixedu-maven-repository</id>
+	  <url>https://repo.fenixedu.org/fenixedu-maven-repository</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+	  <id>fenixedu-maven-repository</id>
+	  <url>https://repo.fenixedu.org/fenixedu-maven-repository</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
