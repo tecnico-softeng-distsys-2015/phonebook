@@ -22,10 +22,7 @@ public class CreateContactService extends PhoneBookService {
     }
 
     public final void dispatch() throws NameAlreadyExistsException, InvalidPhoneNumberException {
-	Person p = getPhoneBook().getPersonByName(personName);
-
-	if (p == null)
-	    throw new PersonDoesNotExistException(personName);
+	Person p = getPerson(personName);
 
 	p.addContact(new Contact(contactName, phoneNumber));
     }

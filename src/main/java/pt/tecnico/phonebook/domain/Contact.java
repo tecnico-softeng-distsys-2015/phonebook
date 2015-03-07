@@ -22,5 +22,10 @@ public class Contact extends Contact_Base {
         }
 
         person.addContact(this);
-    }    
+    }
+
+    public void delete() {
+        setPerson(null);
+        deleteDomainObject();
+    }
 }

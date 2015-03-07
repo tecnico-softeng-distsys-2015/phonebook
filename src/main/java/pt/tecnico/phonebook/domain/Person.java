@@ -40,7 +40,11 @@ public class Person extends Person_Base {
     }
 
     public void delete() {
+	for (Contact c : getContactSet())
+	    c.delete();
+
 	setPhoneBook(null);
+
 	deleteDomainObject();
     }
 }
