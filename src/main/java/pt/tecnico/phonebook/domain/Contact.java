@@ -4,12 +4,12 @@ import pt.tecnico.phonebook.exception.InvalidPhoneNumberException;
 import pt.tecnico.phonebook.exception.NameAlreadyExistsException;
 
 public class Contact extends Contact_Base {
-    
+
     public Contact(String name, Integer phoneNumber) throws InvalidPhoneNumberException {
         setName(name);
 
-	if (phoneNumber <= 0)
-	    throw new InvalidPhoneNumberException(phoneNumber);
+        if (phoneNumber <= 0)
+            throw new InvalidPhoneNumberException(phoneNumber);
 
         setPhoneNumber(phoneNumber);
     }
@@ -22,5 +22,10 @@ public class Contact extends Contact_Base {
         }
 
         person.addContact(this);
-    }    
+    }
+
+    public void delete() {
+        setPerson(null);
+        deleteDomainObject();
+    }
 }
