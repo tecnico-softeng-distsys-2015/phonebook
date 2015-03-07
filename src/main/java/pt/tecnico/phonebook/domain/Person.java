@@ -38,4 +38,9 @@ public class Person extends Person_Base {
     public boolean hasContact(String contactName) {
         return getContactByName(contactName) != null;
     }
+
+    public void delete() {
+	setPhoneBook(null);
+	deleteDomainObject();
+    }
 }
