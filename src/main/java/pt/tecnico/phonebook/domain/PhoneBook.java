@@ -19,7 +19,7 @@ public class PhoneBook extends PhoneBook_Base {
         FenixFramework.getDomainRoot().setPhonebook(this);
     }
 
-    private Person getPersonByName(String name) {
+    public Person getPersonByName(String name) {
         for(Person person : getPersonSet()) {
             if(person.getName().equals(name)) {
                 return person;
