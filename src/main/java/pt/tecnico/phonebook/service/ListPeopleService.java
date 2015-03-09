@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import pt.tecnico.phonebook.domain.Person;
 import pt.tecnico.phonebook.domain.PhoneBook;
-import pt.tecnico.phonebook.exception.PersonDoesNotExistException;
 
 public class ListPeopleService extends PhoneBookService {
 
@@ -16,7 +15,7 @@ public class ListPeopleService extends PhoneBookService {
     public ListPeopleService() {
     }
 
-    public final void dispatch() throws PersonDoesNotExistException {
+    public final void dispatch() {
 	PhoneBook pb = getPhoneBook();
 	registeredPeople = new ArrayList<>();
 
