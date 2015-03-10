@@ -1,17 +1,23 @@
 package pt.tecnico.phonebook.domain;
 
-import pt.tecnico.phonebook.exception.InvalidPhoneNumberException;
-import pt.tecnico.phonebook.exception.NameAlreadyExistsException;
+import src.main.java.pt.tecnico.phonebook.exception.ImportDocumentException;
 
 public class Contact extends Contact_Base {
 
+    protected Contact() {
+    }
+
     public Contact(String name, Integer phoneNumber) throws InvalidPhoneNumberException {
         setName(name);
-
-        if (phoneNumber <= 0)
-            throw new InvalidPhoneNumberException(phoneNumber);
-
         setPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public void setPhoneNumber(Integer phoneNumber) {
+        if (phoneNumber <= 0) {
+            throw new InvalidPhoneNumberException(phoneNumber);
+        }
+        super.setPhoneNumber(phoneNumber);
     }
 
     @Override
@@ -27,5 +33,14 @@ public class Contact extends Contact_Base {
     public void delete() {
         setPerson(null);
         deleteDomainObject();
+    }
+
+    public void importFromXML(Element contactElement) throws ImportDocumentException {
+        setName(contactElement.getAttribute("name").getValue());
+        try {
+            setPhoneNumber(contactElement.getAttribute("phoneNumber").getIntValue());
+        } catch (DataConversionException e) {
+            throw new ImportDocumentException();
+        }
     }
 }
