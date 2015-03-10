@@ -41,13 +41,14 @@ public class PhoneBook extends PhoneBook_Base {
     }
 
     public void importPersonFromXML(Element personElement) {
-	String personName = personElement.getAttribute("name").getValue();
-	Person person = getPersonByName(personName);
+        String personName = personElement.getAttribute("name").getValue();
+        Person person = getPersonByName(personName);
 
-	if (person == null) {
-	    person = new Person(personName);
-	}
+        if (person == null) {
+            person = new Person(personName);
+            addPerson(person);
+        }
 
-	person.importFromXML(personElement);
+        person.importFromXML(personElement);
     }
 }

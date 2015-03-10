@@ -13,4 +13,9 @@ public class PersonDoesNotExistException extends PhoneBookException {
     public String getPersonName() {
         return this.personName;
     }
+
+    @Override
+    public String getMessage() {
+        return "Person " + this.personName + " does not exist";
+    }
 }

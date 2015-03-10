@@ -1,6 +1,11 @@
 package pt.tecnico.phonebook.domain;
 
-import src.main.java.pt.tecnico.phonebook.exception.ImportDocumentException;
+import org.jdom2.DataConversionException;
+import org.jdom2.Element;
+
+import pt.tecnico.phonebook.exception.ImportDocumentException;
+import pt.tecnico.phonebook.exception.InvalidPhoneNumberException;
+import pt.tecnico.phonebook.exception.NameAlreadyExistsException;
 
 public class Contact extends Contact_Base {
 
@@ -42,5 +47,13 @@ public class Contact extends Contact_Base {
         } catch (DataConversionException e) {
             throw new ImportDocumentException();
         }
+    }
+
+    public Element exportToXML() {
+        Element element = new Element("contact");
+        element.setAttribute("name", getName());
+        element.setAttribute("phoneNumber", Integer.toString(getPhoneNumber()));
+
+        return element;
     }
 }

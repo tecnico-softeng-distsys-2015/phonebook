@@ -1,10 +1,10 @@
 package pt.tecnico.phonebook.exception;
 
-public class ImportDocumentException extends PhoneBookException {
+public class ExportDocumentException extends PhoneBookException {
 
     private static final long serialVersionUID = 1L;
 
-    public ImportDocumentException() {
+    public ExportDocumentException() {
         super("Error in importing person from XML");
     }
 }

@@ -1,8 +1,5 @@
 package pt.tecnico.phonebook.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdom2.Element;
 
 import pt.tecnico.phonebook.exception.NameAlreadyExistsException;
@@ -54,17 +51,32 @@ public class Person extends Person_Base {
     }
 
     public void importFromXML(Element personElement) {
-	// clear current phone book
-	for (Contact c : getContactSet())
-	    c.delete();
+        // clear current phone book
+        for (Contact c : getContactSet())
+            c.delete();
 
         setName(personElement.getAttribute("name").getValue());
         Element contacts = personElement.getChild("contacts");
-        
+
         for (Element contactElement : contacts.getChildren("contact")) {
             Contact c = new Contact();
             c.importFromXML(contactElement);
             addContact(c);
         }
+    }
+
+    public Element exportToXML() {
+        Element element = new Element("person");
+
+        element.setAttribute("name", getName());
+
+        Element contactsElement = new Element("contacts");
+        element.addContent(contactsElement);
+
+        for (Contact c : getContactSet()) {
+            contactsElement.addContent(c.exportToXML());
+        }
+
+        return element;
     }
 }

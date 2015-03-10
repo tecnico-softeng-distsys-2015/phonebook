@@ -13,4 +13,9 @@ public class InvalidPhoneNumberException extends PhoneBookException {
     public int getInvalidPhoneNumber() {
         return this.phoneNumber;
     }
+
+    @Override
+    public String getMessage() {
+        return "Invalid phone number format: " + this.phoneNumber;
+    }
 }
