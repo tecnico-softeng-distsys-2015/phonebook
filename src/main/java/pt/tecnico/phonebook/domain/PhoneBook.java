@@ -1,5 +1,7 @@
 package pt.tecnico.phonebook.domain;
 
+import org.jdom2.Element;
+
 import pt.ist.fenixframework.FenixFramework;
 
 import pt.tecnico.phonebook.exception.NameAlreadyExistsException;
@@ -38,5 +40,16 @@ public class PhoneBook extends PhoneBook_Base {
             throw new NameAlreadyExistsException(personToBeAdded.getName());
         
         super.addPerson(personToBeAdded);
+    }
+
+    public void importPersonFromXML(Element personElement) {
+	String personName = personElement.getAttribute("name").getValue();
+	Person person = getPersonByName(personName);
+
+	if (person == null) {
+	    person = new Person(personName);
+	}
+
+	person.importFromXML(personElement);
     }
 }
