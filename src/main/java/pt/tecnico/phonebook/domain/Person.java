@@ -67,4 +67,19 @@ public class Person extends Person_Base {
             addContact(c);
         }
     }
+
+    public Element exportToXML() {
+        Element element = new Element("person");
+
+        element.setAttribute("name", getName());
+
+        Element contactsElement = new Element("contacts");
+        element.addContent(contactsElement);
+
+        for (Contact c : getContactSet()) {
+            contactsElement.addContent(c.exportToXML());
+        }
+
+        return element;
+    }
 }

@@ -48,4 +48,12 @@ public class Contact extends Contact_Base {
             throw new ImportDocumentException();
         }
     }
+
+    public Element exportToXML() {
+        Element element = new Element("contact");
+        element.setAttribute("name", getName());
+        element.setAttribute("phoneNumber", Integer.toString(getPhoneNumber()));
+        
+        return element;
+    }
 }

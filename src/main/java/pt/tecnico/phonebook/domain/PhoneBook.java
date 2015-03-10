@@ -48,6 +48,7 @@ public class PhoneBook extends PhoneBook_Base {
 
 	if (person == null) {
 	    person = new Person(personName);
+	    addPerson(person);
 	}
 
 	person.importFromXML(personElement);

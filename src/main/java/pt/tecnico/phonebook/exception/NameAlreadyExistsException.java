@@ -13,4 +13,9 @@ public class NameAlreadyExistsException extends PhoneBookException {
     public String getConflictingName() {
 	return this.conflictingName;
     }	
+
+    @Override
+    public String getMessage() {
+	return "This name " + this.conflictingName + " is already being used";
+    }
 }

@@ -21,7 +21,7 @@ public class CreateContactService extends PhoneBookService {
 	this.personName = personName;
     }
 
-    public final void dispatch() throws NameAlreadyExistsException, InvalidPhoneNumberException {
+    public final void dispatch() throws NameAlreadyExistsException, InvalidPhoneNumberException, PersonDoesNotExistException {
 	Person p = getPerson(personName);
 
 	p.addContact(new Contact(contactName, phoneNumber));
